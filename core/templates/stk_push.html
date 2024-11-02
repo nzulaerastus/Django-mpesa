@@ -1,0 +1,47 @@
+<!-- templates/mpesa/payment_form.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Payment</title>
+</head>
+<body>
+<h1>Initiate M-Pesa Payment</h1>
+
+<form id="paymentForm" method="post" action="{% url 'core:stk-push' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Pay Now</button>
+</form>
+
+<div id="response"></div>
+
+{% comment %}
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const responseDiv = document.getElementById('response');
+
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            responseDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        })
+        .catch(error => {
+            responseDiv.innerHTML = `<pre>${error}</pre>`;
+        });
+    });
+</script>
+{% endcomment %}
+</body>
+</html>
