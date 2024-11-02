@@ -12,7 +12,6 @@ initiate = InitiateStkPush()
 
 class STKPush(View):
     def get(self, *args, **kwargs):
-        print(access)
         form = STKPushForm()
         context = {'form': form}
         return render(self.request, 'stk_push.html', context)
@@ -24,9 +23,6 @@ class STKPush(View):
             amount = form.cleaned_data['amount']
             reference = 'MURSTECH'  # form.cleaned_data['reference']
             description = 'MURSTECH'  # form.cleaned_data['description']
-            print(phone_number)
-            print(amount)
             response = initiate.stk_push(int(phone_number), int(amount), reference, description)
-            print(response)
             # return JsonResponse(response)
             return redirect('core:stk-push-success')

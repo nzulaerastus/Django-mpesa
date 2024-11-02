@@ -1,0 +1,42 @@
+*{
+    margin: auto;
+    height: 100%
+    width: 100%
+}
+
+
+body{
+    display: flex;
+    justify-content: center:
+    align-items: center;
+    flex-direction: column;
+}
+
+#paymentForm{
+    background-color: blue;
+    align-items: flex-start;
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
+#paymentForm p{
+    display: flex;
+    flex-direction: column;
+}
+
+#paymentForm input{
+    border-radius: .5rem;
+    padding: .5rem;
+}
+
+#paymentForm button{
+    border-radius: .5rem;
+    margin: 1rem 0;
+    padding: .5rem 2rem;
+    font-size: 1rem;
+}
+
+#paymentForm label{
+    width: 100%
+}
+

@@ -1,19 +1,21 @@
 <!-- templates/mpesa/payment_form.html -->
 
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Pesa Payment</title>
+    <title>MPESA</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 </head>
 <body>
-<h1>Initiate M-Pesa Payment</h1>
+<h1>PAY WITH MPESA</h1>
 
 <form id="paymentForm" method="post" action="{% url 'core:stk-push' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Pay Now</button>
+    <button type="submit">Pay</button>
 </form>
 
 <div id="response"></div>
