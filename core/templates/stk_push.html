@@ -1,49 +1,17 @@
-<!-- templates/mpesa/payment_form.html -->
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MPESA</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-</head>
-<body>
-<h1>PAY WITH MPESA</h1>
+{% block content %}
+<div class="stk-push-container">
+    <div class="container-header">
+        <h1>PAY WITH MPESA</h1>
+    </div>
+    <div class="container-body">
+        <form id="paymentForm" method="post" action="{% url 'core:stk-push' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Pay</button>
+        </form>
+    </div>
 
-<form id="paymentForm" method="post" action="{% url 'core:stk-push' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Pay</button>
-</form>
-
-<div id="response"></div>
-
-{% comment %}
-<script>
-    document.getElementById('paymentForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-        const responseDiv = document.getElementById('response');
-
-        fetch(this.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            responseDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-        })
-        .catch(error => {
-            responseDiv.innerHTML = `<pre>${error}</pre>`;
-        });
-    });
-</script>
-{% endcomment %}
-</body>
-</html>
+</div>
+{% endblock content %}
